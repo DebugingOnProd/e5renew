@@ -28,6 +28,9 @@ dependencies {
     implementation("com.github.xiaoymin:knife4j-openapi3-jakarta-spring-boot-starter:4.0.0")
     implementation("com.lmax:disruptor:3.4.4")
     implementation("mysql:mysql-connector-java:8.0.30")
+    implementation ("com.microsoft.graph:microsoft-graph:5.+")
+    // Include Azure identity for authentication
+    implementation ("com.azure:azure-identity:1.+")
     compileOnly("org.projectlombok:lombok")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     annotationProcessor("org.projectlombok:lombok")
