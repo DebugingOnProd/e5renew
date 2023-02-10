@@ -1,1 +1,9 @@
+server:
+  port: 8888
 
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/e5renew
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
