@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="debug">
+    <properties>
+        <!--日志输出位置-->
+        <property name="LOG_HOME">./logs</property>
+    </properties>
+    <Appenders>
+        <!--*********************控制台日志***********************-->
+        <Console name="consoleAppender" target="SYSTEM_OUT">
+            <!--设置日志格式及颜色-->
+            <!--            <PatternLayout
+                                pattern="[%style{%-d{HH:mm:ss}}{bright,green}][%highlight{%p}][%style{%t}{bright,blue}][%style{%C}{bright,yellow}]->%msg%n%style{%throwable}{red}"
+                                disableAnsi="false" noConsoleNoAnsi="false"/>-->
+            <PatternLayout
+                    pattern="%style{%-d{HH:mm:ss.SSS}}{bright,green}[%style{%pid}{bright,blue}][%style{%t}{bright,blue}] %style{%c{1.}}{bright,yellow}  [%highlight{%p}]-> %highlight{%m%n}"
+                    disableAnsi="false" noConsoleNoAnsi="false"/>
+        </Console>
+
+        <!--*********************文件日志***********************-->
+        <RollingFile name="fileAppender"
+                     fileName="${LOG_HOME}/JavaLearn.log"
+                     filePattern="${LOG_HOME}/JavaLearn-%d{yyyy-MM-dd}-%i.log">
+            <!--设置日志格式-->
+            <PatternLayout>
+                <pattern>[%d][%p][%t][%C] %m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <!-- 设置日志文件切分参数 -->
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+            <!--设置最大存档数-->
+            <DefaultRolloverStrategy max="20"/>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <!-- 根日志设置 -->
+        <AsyncRoot level="info">
+            <AppenderRef ref="consoleAppender"/>
+            <AppenderRef ref="fileAppender" level="info"/>
+        </AsyncRoot>
+        <!--项目配置-->
+        <AsyncLogger name="org.lhq" level="trace" additivity="false">
+            <AppenderRef ref="consoleAppender"/>
+        </AsyncLogger>
+
+    </Loggers>
+
+</Configuration>
