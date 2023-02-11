@@ -44,6 +44,9 @@
         <AsyncLogger name="org.lhq" level="trace" additivity="false">
             <AppenderRef ref="consoleAppender"/>
         </AsyncLogger>
+        <AsyncLogger name="org.springframework.web" level="debug" additivity="false">
+            <AppenderRef ref="consoleAppender"/>
+        </AsyncLogger>
 
     </Loggers>
 

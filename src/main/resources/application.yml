@@ -8,7 +8,6 @@ spring:
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
 
-# springdoc-openapi????
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
@@ -20,7 +19,6 @@ springdoc:
     - group: 'default'
       paths-to-match: '/**'
       packages-to-scan: org.lhq.e5renew.controller
-# knife4j???????????????
 knife4j:
   enable: true
   setting:
