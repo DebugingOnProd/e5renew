@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 @RestController
 @RequestMapping("test")
 @Slf4j
@@ -23,7 +26,8 @@ public class TestController {
 
     @PostMapping("bug")
     public AzureParamRecord test(@RequestBody AzureParamRecord azureParam){
-        rpcSercvice.call(azureParam);
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        executorService.execute(()->rpcSercvice.call(azureParam));
         return azureParam;
     }
 }
