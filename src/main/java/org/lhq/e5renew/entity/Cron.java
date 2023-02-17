@@ -7,9 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AzureParam {
-    private Long id;
-    private String clientId;
-    private String clientSecret;
-    private String tenantId;
+public class Cron {
+    private String cron;
 }
