@@ -1,3 +1,5 @@
+import org.gradle.api.tasks.testing.logging.TestLogEvent
+
 plugins {
     java
     id("org.springframework.boot") version "3.0.2"
@@ -15,8 +17,8 @@ configurations {
 }
 
 repositories {
-    maven { url=uri("https://maven.aliyun.com/repository/public/") }
-    maven { url=uri("https://maven.aliyun.com/repository/spring/") }
+    maven { url = uri("https://maven.aliyun.com/repository/public/") }
+    maven { url = uri("https://maven.aliyun.com/repository/spring/") }
     mavenCentral()
 }
 
@@ -24,23 +26,34 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-log4j2:3.0.2")
     implementation("com.baomidou:mybatis-plus-boot-starter:3.5.3.1")
-    implementation ("cn.hutool:hutool-all:5.8.11")
+    implementation("cn.hutool:hutool-all:5.8.11")
     implementation("com.github.xiaoymin:knife4j-openapi3-jakarta-spring-boot-starter:4.0.0")
     implementation("com.lmax:disruptor:3.4.4")
     implementation("mysql:mysql-connector-java:8.0.30")
-    implementation ("com.microsoft.graph:microsoft-graph:5.+")
+    implementation("com.microsoft.graph:microsoft-graph:5.+")
     // Include Azure identity for authentication
-    implementation ("com.azure:azure-identity:1.+")
+    implementation("com.azure:azure-identity:1.+")
     compileOnly("org.projectlombok:lombok")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     annotationProcessor("org.projectlombok:lombok")
+    testAnnotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
 configurations.all() {
-    exclude(group="org.springframework.boot",module = "spring-boot-starter-logging")
+    exclude(group = "org.springframework.boot", module = "spring-boot-starter-logging")
+}
+
+tasks.compileJava {
+    options.encoding = "utf-8"
+}
+tasks.compileTestJava {
+    options.encoding = "utf-8"
 }
 
 tasks.withType<Test> {
     useJUnitPlatform()
+    this.testLogging{
+        this.events("PASSED")
+    }
 }
